@@ -1,0 +1,225 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Linq;
+
+namespace LAB_3
+{
+    internal class Program
+    {
+        class IsoTriangle
+        {
+            protected int a; //основа
+            protected int b; //бічна
+            protected string color;
+
+            public IsoTriangle(int a, int b, string color)
+            {
+                this.a = a;
+                this.b = b;
+                this.color = color;
+            }
+
+            public int getA()
+            {
+                return a;
+            }
+            public int getB()
+            {
+                return b;
+            }
+
+            public int perimetr()
+            {
+                return a + 2*b;
+            }
+
+            public bool isRight()
+            {
+                return a == b;
+            }
+
+            public double square()
+            {
+                int x = 4 * (b * b) - (a * a);
+                return (a / 4 * Math.Sqrt(x));
+            }
+
+            public void setA(int a)
+            {
+                this.a = a;
+            }
+
+            public void setB(int b)
+            {
+                this.b = b;
+            }
+
+            public void printColor()
+            {
+                Console.WriteLine(color);
+            }
+
+
+        }
+
+        class Employee  // Базовий клас
+        {
+            public string Name { get; set; }
+            public int Age { get; set; }
+
+            public Employee(string name, int age)
+            {
+                Name = name;
+                Age = age;
+            }
+
+            public virtual void Show()
+            {
+                Console.WriteLine("Ім'я: "+ Name + "Вік: "+ Age);
+            }
+        }
+
+        // Похідний клас "Робітник"
+        class Worker : Employee
+        {
+            public string WorkType { get; set; }
+
+            public Worker(string name, int age, string workType)
+                : base(name, age)
+            {
+                WorkType = workType;
+            }
+
+            public override void Show()
+            {
+                base.Show();
+                Console.WriteLine("Тип роботи: "+ WorkType);
+            }
+        }
+
+        // Похідний клас "Кадри"
+        class HR : Employee
+        {
+            public int ManagedEmployees { get; set; }
+
+            public HR(string name, int age, int managedEmployees)
+                : base(name, age)
+            {
+                ManagedEmployees = managedEmployees;
+            }
+
+            public override void Show()
+            {
+                base.Show();
+                Console.WriteLine("Кількість керованих працівників: " + ManagedEmployees);
+            }
+        }
+
+        // Похідний клас "Інженер"
+        class Engineer : Employee
+        {
+            public string Specialty { get; set; }
+
+            public Engineer(string name, int age, string specialty)
+                : base(name, age)
+            {
+                Specialty = specialty;
+            }
+
+            public override void Show()
+            {
+                base.Show();
+                Console.WriteLine("Спеціальність: " + Specialty );
+            }
+        }
+
+        // Похідний клас "Адміністрація"
+        class Administration : Employee
+        {
+            public string Position { get; set; }
+
+            public Administration(string name, int age, string position)
+                : base(name, age)
+            {
+                Position = position;
+            }
+
+            public override void Show()
+            {
+                base.Show();
+                Console.WriteLine("Посада: "+Position);
+            }
+        }
+
+
+
+        static void Main(string[] args)
+        {
+            //task1();
+            //task2();
+
+            
+
+
+
+
+        }
+
+        public static void  task1()
+        {
+            IsoTriangle isoTriangle1 = new IsoTriangle(10, 3, "red");
+            IsoTriangle isoTriangle2 = new IsoTriangle(11, 5, "green");
+            IsoTriangle isoTriangle3 = new IsoTriangle(45, 20, "yellow");
+            IsoTriangle isoTriangle4 = new IsoTriangle(3, 5, "blue");
+
+            IsoTriangle[] isoTriangles = new IsoTriangle[]{
+                isoTriangle1, isoTriangle2, isoTriangle3, isoTriangle4};
+        }
+        public static void task2() {
+            Employee[] employees = CreateEmployeesArray();
+
+            Console.WriteLine("Масив до сортування:");
+            ShowEmployees(employees);
+
+            // Сортуємо масив за віком (від молодших до старших)
+            Array.Sort(employees, (emp1, emp2) => emp1.Age.CompareTo(emp2.Age));
+
+            Console.WriteLine("\nМасив після сортування за віком:");
+            ShowEmployees(employees);
+
+        }
+
+
+
+
+
+        static Employee[] CreateEmployeesArray()
+        {
+            return new Employee[]
+            {
+            new Worker("Олексій", 30, "Зварювальник"),
+            new HR("Марія", 45, 20),
+            new Engineer("Ігор", 35, "Механіка"),
+            new Administration("Анна", 50, "Директор"),
+            new Worker("Василь", 25, "Слюсар"),
+            new Engineer("Олена", 40, "Програміст")
+            };
+        }
+
+        // Функція для виводу масиву
+        static void ShowEmployees(Employee[] employees)
+        {
+            foreach (var emp in employees)
+            {
+                emp.Show();
+                Console.WriteLine(); // Для відступу
+            }
+        }
+
+
+
+    }
+}
