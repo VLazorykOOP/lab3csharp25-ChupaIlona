@@ -22,13 +22,14 @@ namespace LAB_3
                 this.color = color;
             }
 
-            public int getA()
+            public int A
             {
-                return a;
+                get return a;
+                set this.a = value;
             }
-            public int getB()
+            public int B
             {
-                return b;
+                get return b;
             }
 
             public int perimetr()
@@ -47,7 +48,7 @@ namespace LAB_3
                 return (a / 4 * Math.Sqrt(x));
             }
 
-            public void setA(int a)
+            public void A(int a)
             {
                 this.a = a;
             }
